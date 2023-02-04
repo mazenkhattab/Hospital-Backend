@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->string('day');
+            $table->time('time');
+            $table->foreignId('doctor_id')->constrained('doctors');
             $table->timestamps();
         });
     }

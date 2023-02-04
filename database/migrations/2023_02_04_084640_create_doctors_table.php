@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            // $table->bigInteger('speciality_id');
+            $table->foreignId('speciality_id')->constrained('specialties');
             $table->timestamps();
         });
     }
