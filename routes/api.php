@@ -24,14 +24,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(UserController::class)->group(function(){
-    Route::get('users','index' );
+    Route::middleware(['auth:sanctum', 'admin'])->get('users','index' );
     Route::get('users/{id}','show' );
-    Route::post('users/{id}','store' );
-    Route::patch('users/{id}','update' );
-    Route::delete('users/{id}','destroy' );
+    Route::post('signup','signup' );
+    Route::post('login','login' );
+    Route::middleware(['auth:sanctum', 'admin'])->patch('users/{id}','update' );
+    Route::middleware(['auth:sanctum', 'admin'])->delete('users/{id}','destroy' );
 });
 
-Route::controller(AppointmentController::class)->group(function(){
+Route::middleware(['auth:sanctum', 'admin'])->controller(AppointmentController::class)->group(function(){
     Route::get('Appointments','index' );
     Route::get('Appointments/{id}','show' );
     Route::post('Appointments/{id}','store' );
@@ -39,23 +40,29 @@ Route::controller(AppointmentController::class)->group(function(){
     Route::delete('Appointments/{id}','destroy' );
 });
 
-Route::controller(BookingController::class)->group(function(){
-    Route::get('bookings','index' );
+Route::middleware('auth:sanctum')->controller(BookingController::class)->group(function(){
+    Route::post('bookings','store' );
+    Route::delete('bookings/{id}','destroy' );
+});
+
+Route::middleware(['auth:sanctum', 'admin'])->controller(BookingController::class)->group(function(){
+    Route::get('bookings/{date?}/{speciality?}','index' );
     Route::get('bookings/{id}','show' );
-    Route::post('bookings/{id}','store' );
     Route::patch('bookings/{id}','update' );
     Route::delete('bookings/{id}','destroy' );
+
+   
 });
 
 Route::controller(SpecialityController::class)->group(function(){
     Route::get('specialities','index' );
     Route::get('specialities/{id}','show' );
-    Route::post('specialities/{id}','store' );
-    Route::patch('specialities/{id}','update' );
-    Route::delete('specialities/{id}','destroy' );
+    Route::middleware(['auth:sanctum', 'admin'])->post('specialities/{id}','store' );
+    Route::middleware(['auth:sanctum', 'admin'])->patch('specialities/{id}','update' );
+    Route::middleware(['auth:sanctum', 'admin'])->delete('specialities/{id}','destroy' );
 });
 
-Route::controller(DoctorController::class)->group(function(){
+Route::middleware(['auth:sanctum', 'admin'])->controller(DoctorController::class)->group(function(){
     Route::get('doctors','index' );
     Route::get('doctors/{id}','show' );
     Route::post('doctors/{id}','store' );
