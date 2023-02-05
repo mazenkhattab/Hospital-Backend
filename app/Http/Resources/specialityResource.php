@@ -17,6 +17,7 @@ class specialityResource extends JsonResource
         return [
             'speciality_id'=>$this->id,
             'speciality_name'=>$this->name,
+            'appointments available'=>$this->appointments
         ];
     }
 }
