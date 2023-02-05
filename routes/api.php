@@ -46,8 +46,8 @@ Route::middleware('auth:sanctum')->controller(BookingController::class)->group(f
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->controller(BookingController::class)->group(function(){
-    Route::get('bookings/{date?}/{speciality?}','index' );
-    Route::get('bookings/{id}','show' );
+    Route::get('bookings/{speciality?}/{date?}','index' );
+    Route::get('booking/{id}','show' );
     Route::patch('bookings/{id}','update' );
     Route::delete('bookings/{id}','destroy' );
 

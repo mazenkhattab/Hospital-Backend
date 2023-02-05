@@ -11,9 +11,15 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    public function index($date,$speciality  )
+    public function index($speciality = null,  $date = null)
     {
-     
+        if( $speciality == null){
+            $speciality =  1;
+        }
+        if($date == null){
+            $date =  date("Y-m-d");
+        }
+        // dd($date,$speciality);
         // dd($date);
         $bookings = Booking::all()->where('appointment_date','=',$date)->where('speciality_id','=',$speciality);
         
@@ -25,7 +31,7 @@ class BookingController extends Controller
     {
         $booking = Booking::find($id);
 
-        return $booking;
+        return new BookingResource($booking);
     }
 
   
