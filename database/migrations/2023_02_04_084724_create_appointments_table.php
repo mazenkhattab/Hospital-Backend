@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Reference\Reference;
 
 return new class extends Migration
 {
@@ -17,7 +18,10 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->time('time');
-            $table->foreignId('doctor_id')->constrained('doctors');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('speciality_id');
+            $table->foreign('doctor_id')->Reference('id')->on('doctors');
+            $table->foreign('speciality_id')->Reference('id')->on('specialties');
             $table->timestamps();
         });
     }
