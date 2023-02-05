@@ -19,8 +19,7 @@ class BookingController extends Controller
         if($date == null){
             $date =  date("Y-m-d");
         }
-        // dd($date,$speciality);
-        // dd($date);
+       
         $bookings = Booking::all()->where('appointment_date','=',$date)->where('speciality_id','=',$speciality);
         
         return BookingResource::collection($bookings) ;
