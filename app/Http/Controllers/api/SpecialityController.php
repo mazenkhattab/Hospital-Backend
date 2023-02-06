@@ -14,7 +14,7 @@ class SpecialityController extends Controller
         $specialities = specialty::all();
         
         
-        return  specialityResource::collection($specialities);
+        return  $specialities;
     }
 
 
@@ -22,7 +22,7 @@ class SpecialityController extends Controller
     {
         $specialty = specialty::find($id);
 
-        return $specialty;
+        return  new specialityResource($specialty) ;
     }
 }
 

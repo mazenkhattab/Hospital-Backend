@@ -56,7 +56,7 @@ Route::middleware(['auth:sanctum', 'admin'])->controller(BookingController::clas
 
 Route::controller(SpecialityController::class)->group(function(){
     Route::get('specialities','index' );
-    Route::get('specialities/{id}','show' );
+    Route::get('speciality/{id}','show' );
     Route::middleware(['auth:sanctum', 'admin'])->post('specialities/{id}','store' );
     Route::middleware(['auth:sanctum', 'admin'])->patch('specialities/{id}','update' );
     Route::middleware(['auth:sanctum', 'admin'])->delete('specialities/{id}','destroy' );
